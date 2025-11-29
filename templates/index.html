@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoruba TTS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Yoruba Text-to-Speech</h1>
+            <p>Enter Yoruba text below to generate speech.</p>
+        </header>
+
+        <main>
+            <div class="input-group">
+                <textarea id="textInput" placeholder="Bawo ni, ṣe dada ni? (Type here...)" rows="4"></textarea>
+            </div>
+
+            <div class="controls">
+                <button id="speakBtn">
+                    <span class="btn-text">Speak</span>
+                    <span class="loader"></span>
+                </button>
+            </div>
+
+            <div class="audio-container" id="audioContainer" style="display: none;">
+                <audio id="audioPlayer" controls></audio>
+            </div>
+
+            <div id="statusMessage"></div>
+        </main>
+
+        <footer>
+            <p>Powered by VITS & Coqui TTS</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

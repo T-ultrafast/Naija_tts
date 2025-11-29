@@ -1,0 +1,73 @@
+# Naija XTTS – Yoruba only minimal config
+
+run_name: "naija_xtts_yor"
+output_path: "out/naija_xtts_yor"
+
+# 1. Model definition
+model: "vits"
+
+# 2. Audio / signal processing
+audio:
+  sample_rate: 22050
+  num_mels: 80
+  win_length: 1024
+  hop_length: 256
+  n_fft: 1024
+  fmin: 0
+  fmax: 8000
+
+# 3. Text / tokenizer
+text:
+  cleaners:
+    - "basic_cleaners"
+  language: "multilingual"
+  use_phonemes: false
+  phoneme_language: null
+  characters: "ABCDEFGHIJKLMNOPRSTUWYabcdefghijklmnoprstuvwxyÁÀÉÈÍÌÓÒÚÙáàéèíìóòúùńśǸṇṕṢṣẃạẸẹỌọụ"
+  punctuations: " !',-.:;?[]—''\""
+
+# 4. Dataset configuration
+datasets:
+  - name: "naija_yor"
+    path: "."
+    meta_file_train: "metadata_yor.csv"
+    formatter: "naija"
+
+# 5. Trainer configuration
+trainer:
+  epochs: 5          # keep small at first to test
+  batch_size: 8
+  eval_batch_size: 8
+  num_loader_workers: 2
+  num_eval_loader_workers: 1
+  use_amp: true
+  grad_accumulation: 1
+  log_interval: 50
+  eval_interval: 1000
+  save_interval: 1000
+
+# 6. Optimizer / scheduler
+optimizer: "Adam"
+optimizer_params:
+  weight_decay: 0.000001
+
+lr: 0.0001
+
+lr_scheduler: "OneCycleLR"
+lr_scheduler_params:
+  max_lr: 0.001
+  pct_start: 0.1
+  anneal_strategy: "cos"
+
+# 7. Hardware / distributed
+distributed:
+  use_distributed: false
+  backend: "nccl"
+
+# 8. Speaker / language lists
+speakers:
+  - "yor_f_01"
+
+languages:
+  - "yor"
+
